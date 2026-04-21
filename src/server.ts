@@ -1,9 +1,12 @@
 import app from '@/app';
 import { config } from '@/config/env';
 import logger from '@/config/logger';
+import { connectDatabse, disconnectDatabase } from '@/config/database';
 
 const bootstrap = async () => {
   const port = config.PORT;
+
+  await connectDatabse();
 
   const server = app.listen(port, () => {
     logger.info(`Server running at http://localhost:${port}`);
@@ -13,7 +16,7 @@ const bootstrap = async () => {
 
   const closeServer = () =>
     new Promise<void>((resolve, reject) => {
-      server.close((err) => {
+      server.close((err: any) => {
         if (err) return reject(err);
         resolve();
       });
@@ -28,6 +31,7 @@ const bootstrap = async () => {
     try {
       await closeServer();
       logger.info('⛔ HTTP server closed.');
+      await disconnectDatabase();
       process.exit(0);
     } catch (err) {
       logger.error('Error during shutdown:', err);

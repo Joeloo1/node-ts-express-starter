@@ -5,6 +5,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
+    // "types": ["node"],
 
     // — Emit —
     "outDir": "./dist",
@@ -32,9 +33,9 @@
     "forceConsistentCasingInFileNames": true,
 
     // — Paths (optional, for aliases) —
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["src/*"]
     },
 
     "ignoreDeprecations": "6.0",
@@ -46,5 +47,11 @@
   },
 
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "prisma.config.ts"
+  ]
 }

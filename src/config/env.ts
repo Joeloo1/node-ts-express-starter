@@ -11,4 +11,5 @@ const mustGet = (key: string) => {
 export const config = {
   NODE_ENV: mustGet('NODE_ENV'),
   PORT: mustGet('PORT'),
+  DATABASE_URL: mustGet('DATABASE_URL'),
 };
